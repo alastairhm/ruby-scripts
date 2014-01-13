@@ -5,11 +5,12 @@
 #  Created by Alastair Montgomery on 21/07/2011.
 #  Copyright (c) 2011 All rights reserved.
 #
+#  Updated for new version of Ruby Twitter API https://github.com/sferik/twitter
+#
 
 require "rubygems"
 require "rss"
 require "twitter"
-require "pp"
 
 class GetFeed
 	attr_reader	:feed, :bytes
@@ -46,7 +47,6 @@ class LastFM2Twitter
 		music = Array.new()
 		artists = Array.new()
 		@myFeed.feed.items.each { |item|
-            #pp item
 			artist = item.title.split("\u2013")[0].strip
 			track = item.title.split("\u2013")[1].strip
 			music << [artist,track,item.link]
@@ -59,7 +59,7 @@ class LastFM2Twitter
 	end
 end
 
-codes = ["MUf7VkhxHAnqBPNXXHyUlA","1pVjdlGIm2IYLyIGcqiiViu6ip0BeGZnJjY0XxurY","14243786-yPwFlnfjMUH2TzmQbLFcIGZLXuxzWO2SYEHDt6fWg","5WQldW7sJGMyAeAUSW2ljjSMoab3V8yXfdLiSJp8X4E"]
+codes = ["xxx","xxx","xxx","xxx"]
 myTest = LastFM2Twitter.new("http://ws.audioscrobbler.com/1.0/user/alastair_hm/recenttracks.rss",codes)
 
 puts "Feed has #{myTest.myFeed.feed.items.size} items, with #{myTest.artists.length} artists."
