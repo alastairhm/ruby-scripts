@@ -11,6 +11,9 @@
 require "rubygems"
 require "rss"
 require "twitter"
+require File.expand_path(File.join(File.dirname(__FILE__), "twitterCode.rb"))
+# @twitterCodes = ["Consumer key","Consumer secret","Access token","Access secret"]
+
 
 class GetFeed
 	attr_reader	:feed, :bytes
@@ -59,13 +62,12 @@ class LastFM2Twitter
 	end
 end
 
-codes = ["xxx","xxx","xxx","xxx"]
-myTest = LastFM2Twitter.new("http://ws.audioscrobbler.com/1.0/user/alastair_hm/recenttracks.rss",codes)
+myTest = LastFM2Twitter.new("http://ws.audioscrobbler.com/1.0/user/alastair_hm/recenttracks.rss",@twitterCodes)
 
 puts "Feed has #{myTest.myFeed.feed.items.size} items, with #{myTest.artists.length} artists."
 
 puts "Tweet Updating"
-msgText = "Listening 2 #{myTest.artists.join(", ")}"
+msgText = "Listened 2 #{myTest.artists.join(", ")}"
 puts "Message #{msgText.length} characters."
 if msgText.length > 140 then
 	msgText = msgText[0..139]
