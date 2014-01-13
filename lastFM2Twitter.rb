@@ -11,8 +11,13 @@
 require "rubygems"
 require "rss"
 require "twitter"
+
+# Configuration
+#
 require File.expand_path(File.join(File.dirname(__FILE__), "twitterCode.rb"))
 # @twitterCodes = ["Consumer key","Consumer secret","Access token","Access secret"]
+twitUser = "alastair_hm"
+lastURL = "http://ws.audioscrobbler.com/1.0/user/alastair_hm/recenttracks.rss"
 
 
 class GetFeed
@@ -62,7 +67,7 @@ class LastFM2Twitter
 	end
 end
 
-myTest = LastFM2Twitter.new("http://ws.audioscrobbler.com/1.0/user/alastair_hm/recenttracks.rss",@twitterCodes)
+myTest = LastFM2Twitter.new(lastURL,@twitterCodes)
 
 puts "Feed has #{myTest.myFeed.feed.items.size} items, with #{myTest.artists.length} artists."
 
@@ -77,4 +82,4 @@ puts msgText
 
 myTest.myTweet.update(msgText)
 sleep (2)
-puts myTest.myTweet.user_timeline("alastair_hm").first.text
+puts myTest.myTweet.user_timeline(twitUser).first.text
